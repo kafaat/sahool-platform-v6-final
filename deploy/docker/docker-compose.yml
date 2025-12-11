@@ -1,0 +1,88 @@
+version: '3.8'
+services:
+  # Core Services
+  auth-service:
+    build: ../../auth-service
+    ports:
+      - "8001:8001"
+    environment:
+      - SERVICE_NAME=auth-service
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    depends_on:
+      - postgres
+
+  geo-service:
+    build: ../../geo-service
+    ports:
+      - "8002:8002"
+    environment:
+      - SERVICE_NAME=geo-service
+      - DB_HOST=postgres
+    depends_on:
+      - postgres
+
+  agent-service:
+    build: ../../agent-service
+    ports:
+      - "8003:8003"
+    environment:
+      - SERVICE_NAME=agent-service
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    depends_on:
+      - auth-service
+      - geo-service
+
+  # Data Services
+  imagery-service:
+    build: ../../imagery-service
+    ports:
+      - "8004:8004"
+    environment:
+      - SERVICE_NAME=imagery-service
+      - S3_ENDPOINT=minio
+    depends_on:
+      - minio
+
+  weather-service:
+    build: ../../weather-service
+    ports:
+      - "8005:8005"
+    environment:
+      - SERVICE_NAME=weather-service
+      - OPEN_METEO_API_KEY=${OPEN_METEO_API_KEY}
+
+  # Frontend
+  frontend:
+    build: ../../frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+
+  # Infrastructure
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=sahool
+      - POSTGRES_PASSWORD=sahool_pass
+      - POSTGRES_DB=sahool_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  minio:
+    image: minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=minio_user
+      - MINIO_ROOT_PASSWORD=minio_pass
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+
+volumes:
+  postgres_data:
+  minio_data:
