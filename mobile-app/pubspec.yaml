@@ -1,22 +1,134 @@
-name: sahool_mobile_app
-description: Sahool Agricultural Platform Mobile App.
-version: 1.0.0+1
+name: sahool_mobile
+description: SAHOOL - Smart Agricultural Hub for Operations & Optimization Lifecycle
+publish_to: 'none'
+version: 11.0.0+1100
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  http: ^1.2.0
-  flutter_map: ^6.1.0
-  latlong2: ^0.9.0
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management
+  flutter_bloc: ^8.1.3
+  bloc: ^8.1.2
+  equatable: ^2.0.5
+  
+  # Network & API
+  dio: ^5.4.0
+  retrofit: ^4.1.0
+  connectivity_plus: ^5.0.2
+  web_socket_channel: ^2.4.0
+  
+  # Local Storage & Cache
+  shared_preferences: ^2.2.2
+  flutter_secure_storage: ^9.0.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  sqflite: ^2.3.0
+  
+  # Dependency Injection
+  get_it: ^7.6.4
+  injectable: ^2.3.2
+  
+  # Functional Programming
+  fpdart: ^1.1.0
+  
+  # Navigation
+  go_router: ^12.1.3
+  
+  # UI Components
+  maplibre_gl: ^0.20.0
+  flutter_svg: ^2.0.9
+  cached_network_image: ^3.3.0
+  shimmer: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
+  animate_do: ^3.1.2
+  smooth_page_indicator: ^1.1.0
+  
+  # Forms & Validation
+  flutter_form_builder: ^9.1.1
+  form_builder_validators: ^9.1.0
+  
+  # Maps & Location
+  google_maps_flutter: ^2.5.0
+  geolocator: ^10.1.0
+  geocoding: ^2.1.1
+  
+  # Charts & Graphs
+  fl_chart: ^0.65.0
+  syncfusion_flutter_charts: ^24.1.41
+  
+  # Date & Time
+  intl: ^0.18.1
+  
+  # Permissions
+  permission_handler: ^11.1.0
+  
+  # Media
+  image_picker: ^1.0.4
+  image_cropper: ^5.0.1
+  photo_view: ^0.14.0
+  
+  # Notifications
+  flutter_local_notifications: ^16.2.0
+  
+  # Utils
+  logger: ^2.0.2+1
+  uuid: ^4.2.1
+  url_launcher: ^6.2.2
+  share_plus: ^7.2.1
+  package_info_plus: ^5.0.1
+  device_info_plus: ^9.1.1
+  
+  # JSON & Serialization
+  json_annotation: ^4.8.1
+  freezed_annotation: ^2.4.1
+  
+  # Animations
+  rive: ^0.12.4
+  
+  # Pull to Refresh
+  pull_to_refresh: ^2.0.0
+  
+  # Sliders & Cards
+  flutter_card_swiper: ^6.0.0
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
+  build_runner: ^2.4.7
+  retrofit_generator: ^8.1.0
+  json_serializable: ^6.7.1
+  hive_generator: ^2.0.1
+  injectable_generator: ^2.4.1
+  freezed: ^2.4.5
+  mockito: ^5.4.3
+  bloc_test: ^9.1.5
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/animations/
+    - assets/fonts/
+  
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Cairo-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Cairo-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Cairo-Light.ttf
+          weight: 300
